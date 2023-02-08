@@ -10,7 +10,6 @@ def test_div_positive_with_2_int(f_st_value, second_value, expected_result ):
     assert division(f_st_value, second_value) == expected_result
 
 
-# @pytest.mark.parametrize('f_st_value, second_value', [(10, 0)])
 def test_ZeroDivisionError():
     with pytest.raises(ZeroDivisionError):
         division(20, 0)
@@ -18,3 +17,10 @@ def test_ZeroDivisionError():
 def test_TypeError():
     with pytest.raises(TypeError):
         division(20, 'str')
+
+
+@pytest.mark.parametrize('exp_error, devidable, s', [(ZeroDivisionError, 0, 10),
+                                                (TypeError, 'str', 10)])
+def test_raise_math_errors(exp_error, s, devidable):
+    with pytest.raises(exp_error):
+        division(s, devidable )
