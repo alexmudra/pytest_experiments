@@ -1,0 +1,7 @@
+#for install requirements run: pip install requirements.txt
+
+json
+datetime
+click
+pandas
+pytest==7.1.1
