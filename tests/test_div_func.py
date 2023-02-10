@@ -1,5 +1,5 @@
 #https://www.youtube.com/watch?v=1HtEPEn4-LY
-from utils.test_div_func import division
+from my_funcs.test_div_func import division
 import pytest
 
 @pytest.mark.parametrize('f_st_value, second_value, expected_result', [(10, 5, 2),
@@ -24,3 +24,4 @@ def test_TypeError():
 def test_raise_math_errors(exp_error, s, devidable):
     with pytest.raises(exp_error):
         division(s, devidable )
+
