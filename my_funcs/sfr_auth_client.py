@@ -20,13 +20,13 @@ headers = {'Content-type': 'application/json', 'Accept': 'text/plain',  'Charset
 
 def get_auth_login_status():
     resp = requests.get(base_host + '/users/signin', headers=headers)
-    resp.raise_for_status()  # raises exception when not a 2xx response
-    if resp.status_code != [200, 201, 202, 204]:
-        return resp.json()
-    return resp.raise_for_status
+    # resp.status_code  # raises exception when not a 2xx response
+    # if resp.status_code != [200, 201, 202, 204]:
+    #     return resp.json()
+    return resp.status_code
 
-def get_auth_json_response_body():
-    HTTPConnection.debuglevel = 2
+def get_auth_json_response_body_status():
+    HTTPConnection.debuglevel = 1
     try:
         r = requests.get(base_host + '/users/signin', headers=headers)
         if r.status_code != [200, 201, 202, 204]:
@@ -50,9 +50,16 @@ def get_auth_json_response_body():
     # print("Це декодований респонс в json формат: ", r.json())
     # print("Це декодований респонс в json формат: ", resp_json)
 
+def get_auth_json_response_body():
+    HTTPConnection.debuglevel = 1
+    r = requests.get(base_host + '/users/signin', headers=headers)
+    resp_json = r.json()
+    print(resp_json)
+    return  resp_json
+
 
 if __name__ == "__main__":
-    get_auth_login_status()
+    get_auth_json_response_body()
 
 
 
