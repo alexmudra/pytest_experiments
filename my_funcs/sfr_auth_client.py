@@ -14,34 +14,32 @@ from http.client import HTTPConnection
     #     resp = requests.get(f'{self.url}/users/signin')
     #     json_data = json.loads(resp.content)
     #     return json_data
+
 base_host = 'http://marketplace.sphera.byustudio.in.ua/marketplace'
+headers = {'Content-type': 'application/json', 'Accept': 'text/plain',  'Charset':'UTF-8', 'User-Agent': 'PostmanRuntime/7.30.1'}
+
 def get_auth_login_status():
-    headers = {"Content-Type": "application/json; Charset=UTF-8"}
     resp = requests.get(base_host + '/users/signin', headers=headers)
     resp.raise_for_status()  # raises exception when not a 2xx response
     if resp.status_code != [200, 201, 202, 204]:
         return resp.json()
-    print(resp)
-    # return json_data
+    return resp.raise_for_status
 
+def get_auth_json_response_body():
+    HTTPConnection.debuglevel = 2
+    try:
+        r = requests.get(base_host + '/users/signin', headers=headers)
+        if r.status_code != [200, 201, 202, 204]:
+            raise Exception("Raises exception when not a 2xx response")
+    finally: resp_json = r.json()
+    return  resp_json
+    # auth_login = resp_json['authorization'] ['login']
+    # auth_exp = resp_json['authorization'] ['exp']
+    # print(auth_login , auth_exp)
 
-# if __name__ == "__main__":
-
-# get_auth_login_status( )
-
-json_file_path = 'http://marketplace.sphera.byustudio.in.ua/marketplace/users/signin'
-headers = {"Content-Type": "application/json; Charset=UTF-8"}
-
-def get_auth_viastoreto_file():
-    # r = requests.get('http://marketplace.sphera.byustudio.in.ua/marketplace/users/signin', headers={'Content-Type': 'application/json; charset=UTF-8'})
-    # print (requests.get('http://marketplace.sphera.byustudio.in.ua/marketplace/users/signin', headers={'Content-Type': 'application/json; charset=UTF-8'}))
-    HTTPConnection.debuglevel = 1
-    headers = {'Content-type': 'application/json', 'Accept': 'text/plain',  'Charset':'UTF-8', 'User-Agent': 'PostmanRuntime/7.30.1'}
-    r = requests.get('http://marketplace.sphera.byustudio.in.ua/marketplace/users/signin', headers=headers)
-
-    print("Це урл на який відправляється запит", r.url)
-    print("type респонса:", type(r))
-    print("Статус респонса, str:", r) #<Response [403]>
+    # print(f'На цей {r.url} відправляється запит')
+    # print("type респонса:", type(r))
+    # print("Статус респонса, str:", r) #<Response [403]>
     # print("Це тип відповіді:",type(r.content))
     # print("Це тип decode:",(r.content).decode("utf-8"))
     # print("Це відображення контенту:",r.content)
@@ -49,15 +47,63 @@ def get_auth_viastoreto_file():
     # print("Відображення респонсу: ", r.text)
     # print(a =json.loads(r.text))
     # print("Це відображення headers респонса: ", r.headers())
-    print("Це декодований респонс в json формат: ", r.json())
-
-    # data = r.text
-    # # try:
-    # data_json = json.loads(data)
-    # print(data_json)
-    # # except json.JSONDecodeError:
-    # #     print("Empty response")
+    # print("Це декодований респонс в json формат: ", r.json())
+    # print("Це декодований респонс в json формат: ", resp_json)
 
 
 if __name__ == "__main__":
-    get_auth_viastoreto_file()
+    get_auth_login_status()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
